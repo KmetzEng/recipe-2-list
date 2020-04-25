@@ -6,9 +6,15 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.19.2",
+    "cors": "^2.8.5",
+    "needle": "^2.4.1",
+    "puppeteer": "^3.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "tiny-json-http": "^7.1.2",
+    "ws": "^7.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,5 +36,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:4000"
 }

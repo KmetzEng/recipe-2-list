@@ -16,29 +16,31 @@ class Search extends Component {
     }
 
     submitURL = () => {
-        this.props.handleSearch(this.state)
+        this.props.handleSearch(this.state.recipeURL)
         this.setState(this.initialState)
-        
     }
 
     render() {
         const { recipeURL } = this.state
         return (
-            <form>
-                <label htmlFor="recipeURL">Recipe URL:</label>
-                <input 
-                    type="text"
-                    name="recipeURL"
-                    id="recipeURL"
-                    value={ this.recipeURL }
-                    onChange={ this.handleInput }
-                />
-                <input 
-                    type="button"
-                    value="Search!"
-                    onClick={ this.submitURL }
-                />
-            </form>
+            <div className="search-form" id="recipe-url-search">
+                <form>
+                    <label htmlFor="recipeURL">Recipe URL:</label>
+                    <input 
+                        type="text"
+                        name="recipeURL"
+                        id="recipe-url"
+                        value={ this.recipeURL }
+                        onChange={ this.handleInput }
+                    />
+                    <input 
+                        type="button"
+                        id="search-btn"
+                        value="Search!"
+                        onClick={ this.submitURL }
+                    />
+                </form>
+            </div>
         );
     }
 }
