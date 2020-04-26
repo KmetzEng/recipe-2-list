@@ -1,19 +1,26 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class IngredientList extends Component {
-    
-    
-    
-    render() {
+const IngredientArrayToList = (props) => {
+    const ingredients = props.ingredients.map((ingredient, index) => {
+        let ingredientNoSpan = ingredient.toString().replace(/<\/?span[^>]*>/g,'').replace(/&nbsp;/gi,'');
         return (
-            <div className="ingredients">
-                <h2 className="ingredient-header">Ingredients:</h2>
-                <ul className="ingredient-list">
-                    <li>Ingredients listed here...</li>
-                </ul>
-            </div>
-        )
-    }
+            <li>{ ingredientNoSpan }</li>
+        );
+    })
+
+    return <ul className="ingredients-list">{ ingredients }</ul>
+};
+
+
+const IngredientList = (props) => {
+    const { ingredients } = props;
+
+    return (
+        <div className="ingredients-container">
+            <h3 className="ingredients-header">Ingredients:</h3>
+            <IngredientArrayToList ingredients={ingredients}/>
+        </div>
+    );
 }
 
-export default IngredientList
+export default IngredientList;

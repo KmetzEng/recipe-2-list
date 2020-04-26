@@ -1,16 +1,26 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class InstructionList extends Component {
-    render() {
-        return(
-            <div className="instructions">
-                <h2 className="instruction-header">Instructions:</h2>
-                <ol className="instruction-list">
-                    <li>Steps listed here...</li>
-                </ol>
-            </div>
-        )
-    }
+const InstructionArrayToList = (props) => {
+    const instructions = props.instructions.map((instruction, index) => {
+        let instructionNoSpan = instruction.toString().replace(/<\/?span[^>]*>/g,'').replace(/&nbsp;/gi,'');
+        return (
+            <li>{ instructionNoSpan }</li>
+        );
+    })
+
+    return <ol className="instruction-list">{ instructions }</ol>
+};
+
+
+const InstructionsList = (props) => {
+    const { instructions } = props;
+
+    return (
+        <div className="instructions-container">
+            <h3 className="instructions-header">Instructions:</h3>
+            <InstructionArrayToList instructions={instructions}/>
+        </div>
+    );
 }
 
-export default InstructionList
+export default InstructionsList;

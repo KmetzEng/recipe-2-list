@@ -21,7 +21,6 @@ class Search extends Component {
     }
 
     render() {
-        const { recipeURL } = this.state
         return (
             <div className="search-form" id="recipe-url-search">
                 <form>

@@ -13,14 +13,24 @@ class App extends Component {
   };
 
 
-  handleSearch = recipeURL => {
-    this.setState({ recipeURL: recipeURL, ingredients: [], instructions: [] }, this.getRecipeInfo)
+  handleSearch = (recipeURL) => {
+    this.setState({ recipeURL: recipeURL, ingredients: [], instructions: [] }, this.getRecipeInfo);
   };
 
 
+  updateRecipeInfo = (ingArr, instrArr) => {
+    this.setState({ recipeURL: '', ingredients: ingArr, instructions: instrArr });
+  };
+
+
+  processRecipeData = (data) => {
+    let dataArr = [];
+    data.forEach(el => dataArr.push(el.innerHTML));
+    return dataArr;
+  }
+
   getRecipeInfo = async () => {
     const { recipeURL } = this.state;
-    console.log(recipeURL);
 
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';  // Allows cors for front-end js
 
@@ -30,32 +40,20 @@ class App extends Component {
       })
       .then((html) => {
         var parser = new DOMParser();
-        var doc = parser.parseFromString(html, "text/html");
+        var doc = parser.parseFromString(html, 'text/html');
         return doc;
-      });
-    console.log((await pageData).body.getElementsByTagName('ol'));
+    });
 
-    let ings = this.getRecipeIngredients(pageData);      
-    console.log(ings);
+    
+    // Get ingredient data and instruction data as node lists and then make arrays
+    const ingData = Array.from((await pageData).querySelectorAll('div[class*=ingredients] > ul > li'));
+    const instrData = Array.from((await pageData).querySelectorAll('div[class*=instructions] > ol > li'));
 
-    let instrs = this.getRecipeInstructions(pageData);
-    console.log(instrs);
+    let ingArr = this.processRecipeData(ingData);
+    let instrArr = this.processRecipeData(instrData);
+
+    this.updateRecipeInfo(ingArr, instrArr);
   };
-
-
-  getRecipeIngredients = (pageData) => {
-    let dom = new DOMParser().parseFromString(pageData, 'text/html');
-    let uls = dom.querySelectorAll('ul');
-    return uls;
-  };
-
-
-  getRecipeInstructions = (pageData) => {
-    let dom = new DOMParser().parseFromString(pageData, 'text/html');
-    let ols = dom.querySelectorAll('ol');
-    return ols;
-  };
-
 
 
   render() {
@@ -63,7 +61,7 @@ class App extends Component {
 
     return (
       <div className="container">
-        <h1>Henlo, world!</h1>
+        <h1>Recipe2List</h1>
         <Search handleSearch={ this.handleSearch } />
         <div className="list-container">
           <IngredientList ingredients={ ingredients } />
