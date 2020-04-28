@@ -61,11 +61,17 @@ class App extends Component {
 
     return (
       <div className="container">
-        <h1>Recipe2List</h1>
-        <Search handleSearch={ this.handleSearch } />
+        <div className="main-container">
+          <h1 className="page-title">Recipe2List</h1>
+          <Search handleSearch={ this.handleSearch } />
+        </div>
         <div className="list-container">
           <IngredientList ingredients={ ingredients } />
           <InstructionList instructions={ instructions } />
+        </div>
+        <div className="compat-list">
+          <p>Recipe Sources Known to Work With Recipe2List</p>
+          <p>Bon Appetit - </p>
         </div>
       </div>
     );
