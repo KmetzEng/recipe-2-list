@@ -3,6 +3,9 @@ import Search from './Search';
 import IngredientList from './IngredientList';
 import InstructionList from './InstructionList';
 
+const supported_sources = [
+  'cookieandkate.com',
+];
 
 class App extends Component {
 
@@ -27,11 +30,18 @@ class App extends Component {
     let dataArr = [];
     data.forEach(el => dataArr.push(el.innerHTML));
     return dataArr;
-  }
+  };
+
+
+  checkIfSupported = (source) => {
+    return supported_sources.some( src => src === source);  // Check if some source is the one we're looking for
+  };
+
 
   getRecipeInfo = async () => {
     const { recipeURL } = this.state;
 
+    let recipeDomain = recipeURL.replace('https://', '').replace('http://', '').split('/')[0];  // used for selecting parse method
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';  // Allows cors for front-end js
 
     let pageData = fetch(proxyUrl + recipeURL)
@@ -44,6 +54,13 @@ class App extends Component {
         return doc;
     });
 
+    if(this.checkIfSupported(recipeDomain)) {
+      console.log('Supported Recipe Source!');
+      // TODO - get and use the correct parsing technique
+    }
+    else {
+      console.log('Unsupported Recipe Source!');
+    }
     
     // Get ingredient data and instruction data as node lists and then make arrays
     const ingData = Array.from((await pageData).querySelectorAll('div[class*=ingredients] > ul > li'));
