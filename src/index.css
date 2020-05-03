@@ -24,6 +24,32 @@ body {
   margin: 1%;
 }
 
+#recipe-url {
+  margin-top: 5px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 5px;
+  width: 80%;
+  border: 5px solid #ffffff;
+  border-radius: 15px;
+}
+
+input {
+  text-align: center;
+}
+
+#search-btn {
+  width: 25%;
+  height: 15%;
+  border-radius: 15px;
+  font-size: large;
+}
+
+.search-label {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
 .list-container {
   display: flex;
 }
@@ -59,4 +85,12 @@ body {
 .instructions-header {
   text-align: center;
   text-decoration: underline #000000;
+}
+
+.instruction {
+  margin-bottom: 10px;
+}
+
+.ingredient {
+  margin-bottom: 5px;
 }

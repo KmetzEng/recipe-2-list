@@ -2,9 +2,8 @@ import React from 'react'
 
 const IngredientArrayToList = (props) => {
     const ingredients = props.ingredients.map((ingredient, index) => {
-        let ingredientNoSpan = ingredient.toString().replace(/<\/?span[^>]*>/g,'').replace(/&nbsp;/gi,'');
         return (
-            <li>{ ingredientNoSpan }</li>
+            <li className="ingredient" key={index}>{ ingredient }</li>
         );
     })
 

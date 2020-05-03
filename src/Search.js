@@ -24,7 +24,7 @@ class Search extends Component {
         return (
             <div className="search-form" id="recipe-url-search">
                 <form>
-                    <label htmlFor="recipeURL">Recipe URL:</label>
+                    <label htmlFor="recipeURL" className="search-label">Enter Recipe Source Here:</label>
                     <input 
                         type="text"
                         name="recipeURL"

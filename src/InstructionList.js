@@ -2,9 +2,8 @@ import React from 'react'
 
 const InstructionArrayToList = (props) => {
     const instructions = props.instructions.map((instruction, index) => {
-        let instructionNoSpan = instruction.toString().replace(/<\/?span[^>]*>/g,'').replace(/&nbsp;/gi,'');
         return (
-            <li>{ instructionNoSpan }</li>
+            <li className="instruction" key={index}>{ instruction }</li>
         );
     })
 

@@ -5,6 +5,8 @@ import InstructionList from './InstructionList';
 
 const supported_sources = [
   'cookieandkate.com',
+  'bonappetit.com',
+  'budgetbytes.com',
 ];
 
 class App extends Component {
@@ -14,7 +16,6 @@ class App extends Component {
     ingredients: [],
     instructions: [],
   };
-
 
   handleSearch = (recipeURL) => {
     this.setState({ recipeURL: recipeURL, ingredients: [], instructions: [] }, this.getRecipeInfo);
@@ -28,7 +29,7 @@ class App extends Component {
 
   processRecipeData = (data) => {
     let dataArr = [];
-    data.forEach(el => dataArr.push(el.innerHTML));
+    data.forEach(el => dataArr.push(el.innerText));
     return dataArr;
   };
 
@@ -38,36 +39,87 @@ class App extends Component {
   };
 
 
+  getSelectorsBySource = (source) => {
+    let selectors = {
+      ingSelector: '',
+      instrSelector: '',
+    };
+
+    switch(source) {
+      case 'cookieandkate.com':
+        selectors['ingSelector'] = 'div[class*=ingredients] > ul > li';
+        selectors['instrSelector'] = 'div[class*=instructions] > ol > li';
+        break;
+      case 'bonappetit.com':
+        selectors['ingSelector'] = 'div[class*=ingredientsGroup] > ul > li';
+        selectors['instrSelector'] = '[class*=steps] > li';
+        break;
+      case 'budgetbytes.com':
+        selectors['ingSelector'] = '[class*=wprm-recipe-ingredients] > li';
+        selectors['instrSelector'] = '[class*=wprm-recipe-instructions] > li';
+        break;
+      default:
+        selectors['ingSelector'] = 'ul > li';
+        selectors['instrSelector'] = 'ol > li';
+        break;
+    };
+
+    console.log(selectors);
+    return selectors;
+  };
+
+
   getRecipeInfo = async () => {
     const { recipeURL } = this.state;
 
-    let recipeDomain = recipeURL.replace('https://', '').replace('http://', '').split('/')[0];  // used for selecting parse method
+    let recipeDomain = recipeURL.replace('https://', '').replace('http://', '').replace('www.', '').split('/')[0];  // used for selecting parse method
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';  // Allows cors for front-end js
 
+    console.log(recipeDomain);
+
+    // Get the page html
     let pageData = fetch(proxyUrl + recipeURL)
       .then((res) => {
         return res.text()
       })
       .then((html) => {
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(html, 'text/html');
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(html, 'text/html');
         return doc;
     });
 
+    // Check if recipe source is supported and modify page
     if(this.checkIfSupported(recipeDomain)) {
-      console.log('Supported Recipe Source!');
-      // TODO - get and use the correct parsing technique
+      document.getElementById('recipe-url').style.border = '5px solid #68e379';
+      document.getElementById('recipe-url').title = 'Recipe Source is Supported!';
+      document.getElementById('recipe-url').value = '';
+      var selectors = this.getSelectorsBySource(recipeDomain);
     }
     else {
-      console.log('Unsupported Recipe Source!');
+      document.getElementById('recipe-url').style.border = '5px solid #e39568';
+      document.getElementById('recipe-url').title = 'Recipe Source is Unsupported! Results may vary.';
+      document.getElementById('recipe-url').value = '';
+      var selectors = this.getSelectorsBySource(recipeDomain);
     }
-    
-    // Get ingredient data and instruction data as node lists and then make arrays
-    const ingData = Array.from((await pageData).querySelectorAll('div[class*=ingredients] > ul > li'));
-    const instrData = Array.from((await pageData).querySelectorAll('div[class*=instructions] > ol > li'));
 
+
+    // Parse Based on Selectors
+    let ingData = [];
+    let instrData = [];
+    if(selectors['ingSelector'] === '') {
+      console.log('no ingredients found!');
+    }
+    else {
+      ingData = Array.from((await pageData).querySelectorAll(selectors['ingSelector']));
+      instrData = Array.from((await pageData).querySelectorAll(selectors['instrSelector']));
+    }
+
+    // clean up arrays
     let ingArr = this.processRecipeData(ingData);
     let instrArr = this.processRecipeData(instrData);
+
+    console.log(ingData, ingArr);
+    console.log(instrData, instrArr);
 
     this.updateRecipeInfo(ingArr, instrArr);
   };
@@ -88,7 +140,7 @@ class App extends Component {
         </div>
         <div className="compat-list">
           <p>Recipe Sources Known to Work With Recipe2List</p>
-          <p>Bon Appetit - </p>
+          <p>Bon Appetit - Budget Bytes - Cookie and Kate - </p>
         </div>
       </div>
     );
