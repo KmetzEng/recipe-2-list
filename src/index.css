@@ -1,8 +1,8 @@
 body {
   margin: 0;
   padding: 3%;
-  background-color: #f7Fbfc;
-  font-family: 'Nunito', sans-serif;
+  background-color: #fcf9de;
+  font-family: 'Open Sans Condensed', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,14 +10,46 @@ body {
 .main-container {
   margin: 0 auto;
   width: 50%;
-  background-color: #b9d7ea;
   border: solid 5px #769fcd;
   border-radius: 15px;
   text-align: center;
 }
 
 .page-title {
-  text-decoration: underline #000000;
+  font-family: 'Yellowtail', cursive;
+  font-size: 50px;
+  font-weight: lighter;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+.sub-title {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: lighter;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.title-text {
+  margin-left: 18px;
+  margin-right: 32px;
+}
+
+.title-img {
+  display: inline-block;
+  padding-top: 25px;
+}
+
+.list-text {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.list-img {
+  display: inline-block;
 }
 
 .search-form {
@@ -30,7 +62,7 @@ body {
   margin-right: 10%;
   margin-bottom: 5px;
   width: 80%;
-  border: 5px solid #ffffff;
+  border: 1px solid #cbcbcb;
   border-radius: 15px;
 }
 
@@ -42,10 +74,12 @@ input {
   width: 25%;
   height: 15%;
   border-radius: 15px;
+  font-family: 'Open Sans Condensed', sans-serif;
   font-size: large;
 }
 
 .search-label {
+  font-size: 20px;
   margin-left: 2%;
   margin-right: 2%;
 }
@@ -58,14 +92,15 @@ input {
   width: 50%;
   margin: 3% 4% 5% 6%; /* t r b l */
   padding: 3px;
-  background-color: #d6e6f2;
   border: solid 5px #769fcd;
   border-radius: 15px;
 }
 
 .ingredients-header {
+  font-family: 'Yellowtail', cursive;
+  font-weight: lighter;
+  font-size: 32px;
   text-align: center;
-  text-decoration: underline #000000;
 }
 
 .ingredient-list {
@@ -77,20 +112,34 @@ input {
   width: 50%;
   margin: 3% 6% 5% 4%;
   padding: 3px;
-  background-color: #d6e6f2;
   border: solid 5px #769fcd;
   border-radius: 15px;
 }
 
 .instructions-header {
+  font-family: 'Yellowtail', cursive;
+  font-weight: lighter;
+  font-size: 32px;
   text-align: center;
-  text-decoration: underline #000000;
 }
 
 .instruction {
   margin-bottom: 10px;
+  margin-right: 10px;
 }
 
 .ingredient {
   margin-bottom: 5px;
+  margin-right: 10px;
+}
+
+.compat-list {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.credits {
+  width: 100%;
+  text-align: center;
 }

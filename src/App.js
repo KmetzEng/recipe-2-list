@@ -89,17 +89,18 @@ class App extends Component {
     });
 
     // Check if recipe source is supported and modify page
+    let selectors = {};
     if(this.checkIfSupported(recipeDomain)) {
       document.getElementById('recipe-url').style.border = '5px solid #68e379';
       document.getElementById('recipe-url').title = 'Recipe Source is Supported!';
       document.getElementById('recipe-url').value = '';
-      var selectors = this.getSelectorsBySource(recipeDomain);
+      selectors = this.getSelectorsBySource(recipeDomain);
     }
     else {
       document.getElementById('recipe-url').style.border = '5px solid #e39568';
       document.getElementById('recipe-url').title = 'Recipe Source is Unsupported! Results may vary.';
       document.getElementById('recipe-url').value = '';
-      var selectors = this.getSelectorsBySource(recipeDomain);
+      selectors = this.getSelectorsBySource(recipeDomain);
     }
 
 
@@ -131,7 +132,12 @@ class App extends Component {
     return (
       <div className="container">
         <div className="main-container">
-          <h1 className="page-title">Recipe2List</h1>
+          <h1 className="page-title">
+            <span><img className="title-img" src="/images/fork_knife_cross.png" height="25px" alt="" /></span>
+            <span className="title-text">Recipe-2-List</span>
+            <span><img className="title-img" src="/images/fork_knife_cross_mirror.png" height="25px" alt="" /></span>
+          </h1>
+          <h2 className="sub-title">recipe ingredients and instructions without the story</h2>
           <Search handleSearch={ this.handleSearch } />
         </div>
         <div className="list-container">
@@ -139,8 +145,13 @@ class App extends Component {
           <InstructionList instructions={ instructions } />
         </div>
         <div className="compat-list">
-          <p>Recipe Sources Known to Work With Recipe2List</p>
-          <p>Bon Appetit - Budget Bytes - Cookie and Kate - </p>
+          <p>
+            Recipe Sources Known to Work With Recipe-2-List<br />
+            Bon Appetit - Budget Bytes - Cookie and Kate
+          </p>
+        </div>
+        <div className="credits">
+          <p>Kmetz Engineering - April 2020<br />kmetzeng@gmail.com</p>
         </div>
       </div>
     );
