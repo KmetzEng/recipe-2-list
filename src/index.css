@@ -84,13 +84,26 @@ input {
   margin-right: 2%;
 }
 
-.list-container {
+.list-container-cols {
   display: flex;
+}
+
+.list-container-stacked {
+  display: flex;
+  flex-direction: column;
 }
 
 .ingredients-container {
   width: 50%;
   margin: 3% 4% 5% 6%; /* t r b l */
+  padding: 3px;
+  border: solid 5px #769fcd;
+  border-radius: 15px;
+}
+
+.ingredients-container-stacked {
+  width: 90%;
+  margin: 5% 0 0 4%;
   padding: 3px;
   border: solid 5px #769fcd;
   border-radius: 15px;
@@ -105,12 +118,19 @@ input {
 
 .ingredient-list {
   text-align: left;
-
 }
 
 .instructions-container {
   width: 50%;
   margin: 3% 6% 5% 4%;
+  padding: 3px;
+  border: solid 5px #769fcd;
+  border-radius: 15px;
+}
+
+.instructions-container-stacked {
+  width: 90%;
+  margin: 5% 0 0 4%;
   padding: 3px;
   border: solid 5px #769fcd;
   border-radius: 15px;
@@ -142,4 +162,49 @@ input {
 .credits {
   width: 100%;
   text-align: center;
+}
+
+#toggle-btn {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  width: 100px;
+  height: 50px;
+}
+
+/* media query for mobile devices */
+@media (max-width: 769px) {
+  .main-container {
+    margin: 0 auto;
+    width: 90%;
+    border: solid 5px #769fcd;
+    border-radius: 15px;
+    text-align: center;
+  }
+
+  .page-title {
+    font-family: 'Yellowtail', cursive;
+    font-size: 36px;
+    font-weight: lighter;
+    margin-top: 30px;
+    margin-bottom: 5px;
+    margin-right: 20px;
+    margin-left: 10px;
+  }
+
+  .list-container-cols {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ingredients-container {
+    width: 90%;
+    margin: 5% 0 0 4%;
+  }
+
+  .instructions-container {
+    width: 90%;
+    margin: 5% 0 0 4%;
+  }
+
 }

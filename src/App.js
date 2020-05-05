@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Search from './Search';
 import IngredientList from './IngredientList';
 import InstructionList from './InstructionList';
+import ToggleBtn from './ToggleBtn';
 
 const supported_sources = [
   'cookieandkate.com',
@@ -131,6 +132,7 @@ class App extends Component {
 
     return (
       <div className="container">
+        <ToggleBtn />
         <div className="main-container">
           <h1 className="page-title">
             <span><img className="title-img" src="/images/fork_knife_cross.png" height="25px" alt="" /></span>
@@ -140,7 +142,7 @@ class App extends Component {
           <h2 className="sub-title">recipe ingredients and instructions without the story</h2>
           <Search handleSearch={ this.handleSearch } />
         </div>
-        <div className="list-container">
+        <div id="list-container" className="list-container-cols">
           <IngredientList ingredients={ ingredients } />
           <InstructionList instructions={ instructions } />
         </div>
