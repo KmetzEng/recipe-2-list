@@ -8,6 +8,12 @@ const supported_sources = [
   'cookieandkate.com',
   'bonappetit.com',
   'budgetbytes.com',
+  'foodnetwork.com',
+  'tasty.co',
+  'allrecipes.com',
+  'thekitchn.com',
+  'myrecipes.com',
+  'eatingwell.com',
 ];
 
 class App extends Component {
@@ -58,6 +64,26 @@ class App extends Component {
       case 'budgetbytes.com':
         selectors['ingSelector'] = '[class*=wprm-recipe-ingredients] > li';
         selectors['instrSelector'] = '[class*=wprm-recipe-instructions] > li';
+        break;
+      case 'foodnetwork.com':
+        selectors['ingSelector'] = 'div[class*=o-Ingredients__m-Body] > p';
+        selectors['instrSelector'] = 'div[class*=o-Method__m-Body] > ol > li';
+        break;
+      case 'tasty.co':
+        selectors['ingSelector'] = 'div[class*=ingredients__section] > ul > li';
+        selectors['instrSelector'] = 'ol[class*=prep-steps] > li';
+        break;
+      case 'allrecipes.com', 'eatingwell.com':
+        selectors['ingSelector'] = 'ul[class*=ingredients-section] > li';
+        selectors['instrSelector'] = 'ul[class*=instructions-section] > li[class*=instructions-section-item] > div[class=section-body] > p';
+        break;
+      case 'thekitchn.com':
+        selectors['ingSelector'] = 'ul[class*=Recipe__ingredients] > li';
+        selectors['instrSelector'] = 'ol[class*=Recipe__instructions] > li';
+        break;
+      case 'myrecipes.com':
+        selectors['ingSelector'] = 'div[class*=ingredients] > ul > li';
+        selectors['instrSelector'] = 'div[class=step] > p';
         break;
       default:
         selectors['ingSelector'] = 'ul > li';
@@ -132,7 +158,6 @@ class App extends Component {
 
     return (
       <div className="container">
-        <ToggleBtn />
         <div className="main-container">
           <h1 className="page-title">
             <span><img className="title-img" src="/images/fork_knife_cross.png" height="25px" alt="" /></span>
@@ -149,7 +174,7 @@ class App extends Component {
         <div className="compat-list">
           <p>
             Recipe Sources Known to Work With Recipe-2-List<br />
-            Bon Appetit - Budget Bytes - Cookie and Kate
+            AllRecipes - Bon Appetit - EatingWell - Food Network - MyRecipes - Tasty - The Kitchn - Budget Bytes - Cookie and Kate
           </p>
         </div>
         <div className="credits">
